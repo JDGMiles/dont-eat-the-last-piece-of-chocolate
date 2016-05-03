@@ -1,0 +1,106 @@
+@font-face {font-family: Liberation Serif; src: url(http://jdgmiles.github.io/LiberationSerif.woff);}
+@font-face {font-family: Liberation Serif Bold; src: url(http://jdgmiles.github.io/LiberationSerif-Bold.woff);}
+@font-face {font-family: Liberation Serif Italic; src: url(http://jdgmiles.github.io/LiberationSerif-Italic.woff);}
+@font-face {font-family: Liberation Serif Bold Italic; src: url(http://jdgmiles.github.io/LiberationSerif-BoldItalic.woff);}
+
+body {font-family: Liberation Serif, Tahoma, Arial, Helvetica, Sans-Serif; background-color:black; color:black; cursor:default;}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.strokeme {text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;}
+
+.gridcell {margin: 0; padding: 0; border: 1px solid white; spacing: 0;}
+
+a:link {color: red; text-decoration: none;}
+a:link:hover {text-decoration:underline}
+a:visited {color:#DD0000;}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border:0px;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index:5;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #181818;
+  border: 2px solid #AAAAAA;
+  border-radius: 20px;
+  width: 33%;
+  position: relative;
+  transition: all 0s ease-in-out;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background-color:#181818;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+.popup .close:hover {
+  color: #DD0000;;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.popup2 {
+  margin: 70px auto;
+  padding: 20px;
+  background: #181818;
+  border: 2px solid #AAAAAA;
+  border-radius: 20px;
+  width: 40%;
+  position: relative;
+  transition: all 0s ease-in-out;
+}
+
+.popup2 .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background-color:#181818;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+.popup2 .close:hover {
+  color: #DD0000;;
+}
+.popup2 .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}

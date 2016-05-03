@@ -1,0 +1,93 @@
+<!DOCTYPE html><html>
+<head>
+	<title>Make Me All White</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body><center>
+
+	<table style="position:absolute; left:10px; top:10px; background-color:black;">
+		<td>
+			<a href="#popup1"><img title="Information" src="../jdgmiles.github.io/questionmark.png" style="width:60px; height:60px"></a><br>
+			<a href="https://twitter.com/jimdgmiles" target=blank_><img title="James Miles on Twitter" src="../jdgmiles.github.io/twitter.png" style="width:60px; height:60px"></a><br>
+			<a href="http://jdgmiles.github.io/" target="_blank"><img title="Projects Page" src="../jdgmiles.github.io/jdgm.png" style="width:60px; height:60px"></a><br>
+			<a href="index.html" style="color:white; font-size:200%; font-style:italic;"><img title="Reset the Puzzle" src="../jdgmiles.github.io/R-White.png" style="width:60px; height:60px"></a></a>
+		</td>
+	</table>
+
+	<div id="popup1" class="overlay">
+		<div class="popup">
+			<a class="close" style="right: 30px;" href="#">&times;</a>
+			<div style="font-family:Georgia; color:white; text-align:center; text-decoration:underline; font-size:250%">Make Me All White</div>
+			<span style="font-family:Georgia; font-size:170%; color:white; text-align:justify;"><br>Move your pointer over a cell to switch it between black and white.<br><br>Paint the whole grid white in as few moves as possible.<br><br>Going outside and then back in is fine.<br><br>As are more...sneaky methods.<br></span>
+		</div>
+	</div>
+
+	<div id="popup2" class="overlay">
+		<div class="popup2">
+			<a class="close" style="right: 30px;" href="index.html">&times;</a>
+			<div id="rank" style="font-family:Georgia; color:white; text-align:center; font-size:400%"></div><br><br>
+			<a style="font-family:Georgia; font-size:300%; color:white; text-align:center;"><span id="moves">Click the cross to close this popup and start the game.</span><br></a><br>
+		</div>
+	</div>
+
+	<div style="width:1070px">
+		<table style="padding:0px 80px 0px 80px;" id="tablecontents"></table>
+	</div>
+
+</center></body>
+</html>
+
+<script type="text/javascript">
+var moves=0;
+var startstate="001010001001010111000101001110011111010101010100001111101000010101011101100110001010101100010101010101010100001010101000010001010101010111001000101110000000000000000000000000000000010010010001000101010101110111101010010001000101010100100100111010010001010101110100100110101010010001111101010100100100101011011000101001010100100111";
+var count=0;
+var notwon=0;
+var tablecolumns=30;
+var tablerows=11;
+var tablecontentsmarkup=" ";
+var maxwidth=1100;
+var maxheight=1100;
+var cellsize=Math.min(Math.floor(maxwidth/tablecolumns), Math.floor(maxheight/tablerows));
+var cellstate=[];
+for(var i=0; i<tablecolumns*tablerows; i++){cellstate[i]=0;}
+for(var i=0; i<tablerows; i++){
+	tablecontentsmarkup=tablecontentsmarkup+"<tr>";
+	for(var j=0; j<tablecolumns; j++){
+		tablecontentsmarkup=tablecontentsmarkup+"<td class=\"gridcell\" id=\""+(i*tablecolumns+j)+"\" onmouseover=\"clicked("+(i*tablecolumns+j)+")\" style=\"width:"+cellsize+"px; height:"+cellsize+"px;\"></td>";
+	}
+	tablecontentsmarkup=tablecontentsmarkup+"</tr>";
+}
+
+document.getElementById("tablecontents").innerHTML=tablecontentsmarkup;
+
+function clicked(cell){
+	moves++;
+	if(cellstate[cell]==0){document.getElementById(cell).style.backgroundColor="white"; document.getElementById(cell).style.borderColor="black"; cellstate[cell]=1;}
+	else{document.getElementById(cell).style.backgroundColor="black";  document.getElementById(cell).style.borderColor="white"; cellstate[cell]=0;}
+	checkboard();
+}
+
+function checkboard(){
+	notwon=0;
+	for(var i=0; i<tablecolumns*tablerows; i++){if(cellstate[i]==0){notwon=1;}}
+	if(notwon==0){
+		document.getElementById("moves").innerHTML="You painted everything white in "+moves+" moves.";
+		document.getElementById("rank").innerHTML="<span style=\"color:#835511; text-decoration:underline;\">RANK: N/A</span>";
+		if(moves<724){document.getElementById("rank").innerHTML="<span style=\"color:#667700; text-decoration:underline;\">RANK: U</span>";}
+		if(moves<633){document.getElementById("rank").innerHTML="<span style=\"color:purple; text-decoration:underline;\">RANK: G</span>";}
+		if(moves<552){document.getElementById("rank").innerHTML="<span style=\"color:#886666; text-decoration:underline;\">RANK: F</span>";}
+		if(moves<481){document.getElementById("rank").innerHTML="<span style=\"color:green; text-decoration:underline;\">RANK: E</span>";}
+		if(moves<420){document.getElementById("rank").innerHTML="<span style=\"color:#FF5555; text-decoration:underline;\">RANK: D</span>";}
+		if(moves<369){document.getElementById("rank").innerHTML="<span style=\"color:#6666FF; text-decoration:underline;\">RANK: C</span>";}
+		if(moves<325){document.getElementById("rank").innerHTML="<span style=\"color:silver; text-decoration:underline;\">RANK: B</span>";}
+		if(moves<290){document.getElementById("rank").innerHTML="<span style=\"color:gold; text-decoration:underline;\">RANK: A</span>";}
+		if(moves<255){document.getElementById("rank").innerHTML="<span class=\"strokeme\" style=\"color:black; text-decoration:underline;\">RANK: S</span>";}
+		window.location.href ='#popup2';}
+}
+
+for(var i=0; i<startstate.length; i++){if(startstate[i]==1){clicked(i);}}
+moves=0;
+
+</script>
