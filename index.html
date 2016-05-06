@@ -104,8 +104,7 @@ function aiturn(){
 	for(var i=0; i<tablecolumns*tablerows; i++){cellstatecount+=cellstate[i];}
 	if(cellstatecount==(tablecolumns*tablerows)-1){
 		document.getElementById((tablecolumns*(tablerows-1))).innerHTML="";
-		document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:800%\"><br>You Won!</span></td></tr>";
-		document.getElementById("instructions").innerHTML="";}
+		document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:800%\"><br>You Won!</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Click here to play again.</span>";}
 
 	else {
 		validcell=0;
