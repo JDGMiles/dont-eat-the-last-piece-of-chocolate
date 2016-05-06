@@ -55,9 +55,10 @@ var playerturn=0;
 var testcell=0;
 var validcell=0;
 var cellstatecount=0;
-var thinkingtimemin=1000;
+var thinkingtimemin=500;
 var thinkingtimerandom=500;
 var thinkingtimerandommodifier=200;
+var cellstatecountII=0;
 
 document.getElementById("tablecontents").innerHTML=tablecontentsmarkup;
 
@@ -107,15 +108,35 @@ function aiturn(){
 
 		cellstatecount=0;
 		for(var i=0; i<tablecolumns*(tablerows-1); i++){cellstatecount+=cellstate[i];}
-		if(cellstatecount==(tablecolumns*(tablerows-1))){testcell=(tablecolumns*(tablerows-1)+1); validcell=1;}
+		if(cellstatecount==(tablecolumns*(tablerows-1))){testcell=(tablecolumns*(tablerows-1)+1); validcell=1;} // makes you lose if down to horizontal 1xn
 
 		cellstatecount=0;
 		for(var i=0; i<tablecolumns*tablerows; i++){if(i%tablecolumns!=0){cellstatecount+=cellstate[i];}}
-		if(cellstatecount==(tablecolumns-1)*tablerows){testcell=tablecolumns*(tablerows-2); validcell=1;}
+		if(cellstatecount==(tablecolumns-1)*tablerows){testcell=tablecolumns*(tablerows-2); validcell=1;}  // makes you lose if down to vertical 1xn
 
+		cellstatecount=0;
+		for(var i=0; i<tablecolumns*tablerows; i+=tablecolumns){if(cellstate[i]==0){cellstatecount++;}}
+		for(var i=tablecolumns*(tablerows-1); i<tablecolumns*tablerows; i++){if(cellstate[i]==0){cellstatecount--;}} // checks if L-symmetric
+		if(cellstatecount==0){testcell=tablecolumns*(tablerows-2)+1; validcell=1;} // if so then chooses winning cell
+
+		cellstatecount=0;
+		cellstatecountII=0;
+		if(cellstate[tablecolumns*(tablerows-2)+1]==1){ // if L-holder is gone checks if L-asymmetric and chooses symmetry-making cell if so
+			for(var i=0; i<tablecolumns*tablerows; i+=tablecolumns){if(cellstate[i]==0){cellstatecount++;}}
+			for(var i=tablecolumns*(tablerows-1); i<tablecolumns*tablerows; i++){if(cellstate[i]==0){cellstatecountII++;}}
+			if(cellstatecount>cellstatecountII){testcell=tablecolumns*(tablerows-cellstatecountII-1); validcell=1;}
+			else if(cellstatecount<cellstatecountII){testcell=tablecolumns*(tablerows-1)+cellstatecount; validcell=1;}
+		}
+
+		cellstatecount=0;
+		for(var i=0; i<tablecolumns*tablerows; i++){cellstatecount+=cellstate[i];}
 		while(!validcell){
 			testcell=Math.floor(tablerows*tablecolumns*Math.random());
-			if(cellstate[testcell]==0 && testcell!=(tablecolumns*(tablerows-1))){validcell=1;}
+			if(cellstate[testcell]==0
+				&& testcell!=(tablecolumns*(tablerows-1)) // won't pick losing cell
+				&& ( ( (testcell!=1+tablecolumns*(tablerows-1)) && (testcell!=tablecolumns*(tablerows-2)) ) || cellstatecount==(tablerows*tablecolumns)-3 ) // won't leave a 1xn
+				&& ( (testcell!=1+tablecolumns*(tablerows-2)) || cellstatecount==(tablerows*tablecolumns)-4 ) // won't leave an L
+			){validcell=1;}
 		}
 
 		for(var i=0; i<(tablecolumns*tablerows); i++){
@@ -126,7 +147,7 @@ function aiturn(){
 		}
 		document.getElementById(testcell).innerHTML="<img src=\"ChocolatePieceDarkerEatCheck.png\" style=\"width:"+cellsize+"px; height:"+cellsize+"px; display:block;\">";
 
-		setTimeout(aiconfirm, 1500);
+		setTimeout(aiconfirm, 900);
 
 	}
 }
@@ -139,6 +160,10 @@ function aiconfirm(){
 
 	playerturn=0;
 	document.getElementById("instructions").innerHTML="<span style=\"font-size:140%\">Your move</span>";
+}
+
+function squarecheck(){
+
 }
 
 </script>
