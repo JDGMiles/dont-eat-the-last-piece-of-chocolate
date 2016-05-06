@@ -12,6 +12,7 @@
 			<a href="#popup1"><img title="Information" src="../jdgmiles.github.io/questionmark.png" style="width:60px; height:60px"></a><br>
 			<a href="https://twitter.com/jimdgmiles" target=blank_><img title="James Miles on Twitter" src="../jdgmiles.github.io/twitter.png" style="width:60px; height:60px"></a><br>
 			<a href="http://jdgmiles.github.io/" target="_blank"><img title="Projects Page" src="../jdgmiles.github.io/jdgm.png" style="width:60px; height:60px"></a><br>
+			<a id="soundcontrol" onclick="togglesound()"><img title="Sound On/Off" src="../jdgmiles.github.io/soundon.png" style="width:60px; height:60px"></a><br>
 		</td>
 	</table>
 
@@ -60,6 +61,8 @@ var thinkingtimerandom=500;
 var thinkingtimerandommodifier=200;
 var cellstatecountII=0;
 var blacklisted=tablerows*tablecolumns+1;
+var audio=new Audio('Om Nom Nom.mp3');
+var sound=1;
 
 document.getElementById("tablecontents").innerHTML=tablecontentsmarkup;
 
@@ -81,6 +84,7 @@ function clicked(cell){
 			cellstate[cell]=2;
 		}
 		else if(cellstate[cell]==2){
+			if(sound==1){audio.play();}
 			for(var i=0; i<(tablecolumns*tablerows); i++){
 				if((i%tablecolumns)>=(cell%tablecolumns) && i<(cell+tablecolumns) && cellstate[i]==0){document.getElementById(i).innerHTML=""; cellstate[i]=1;}
 				else if(cellstate[i]==0){document.getElementById(i).innerHTML="<img src=\"ChocolatePiece.png\" style=\"width:"+cellsize+"px; height:"+cellsize+"px; display:block;\">";}
@@ -163,6 +167,7 @@ function aiturn(){
 }
 
 function aiconfirm(){
+	if(sound==1){audio.play();}
 	for(var i=0; i<(tablecolumns*tablerows); i++){
 		if((i%tablecolumns)>=(testcell%tablecolumns) && i<(testcell+tablecolumns) && cellstate[i]==0){document.getElementById(i).innerHTML=""; cellstate[i]=1;}
 		else if(cellstate[i]==0){document.getElementById(i).innerHTML="<img src=\"ChocolatePiece.png\" style=\"width:"+cellsize+"px; height:"+cellsize+"px; display:block;\">";}
@@ -172,8 +177,9 @@ function aiconfirm(){
 	document.getElementById("instructions").innerHTML="<span style=\"font-size:140%\">Your move</span>";
 }
 
-function squarecheck(){
-
+function togglesound(){
+	if(sound==1){sound=0; document.getElementById("soundcontrol").innerHTML="<img title=\"Sound On/Off\" src=\"../jdgmiles.github.io/soundoff.png\" style=\"width:60px; height:60px\">";}
+	else{sound=1; document.getElementById("soundcontrol").innerHTML="<img title=\"Sound On/Off\" src=\"../jdgmiles.github.io/soundon.png\" style=\"width:60px; height:60px\">";}
 }
 
 </script>
