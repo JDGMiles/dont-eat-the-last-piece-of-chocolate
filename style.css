@@ -5,14 +5,11 @@
 
 body {font-family: Liberation Serif, Tahoma, Arial, Helvetica, Sans-Serif; background-color:black; color:black; cursor:default;}
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+table {border-spacing: 0;}
 
 .strokeme {text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;}
 
-.gridcell {margin: 0; padding: 0; border: 1px solid white; spacing: 0;}
+.gridcell {margin: 0px; padding: 0; border: 0px solid white; spacing: 0;}
 
 a:link {color: red; text-decoration: none;}
 a:link:hover {text-decoration:underline}
