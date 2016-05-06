@@ -28,7 +28,7 @@
 	<table>
 		<tr>
 		<td colspan="9"><center><br>
-			<a id="instructions" style="font-family:Georgia; color:white; font-size:310%"><span onclick="aiturn()">Tap a piece, or tap here to go second</span></a>
+			<a id="instructions" style="font-family:Georgia; color:white; font-size:310%"><span onclick="aiturn()">Tap a piece, or tap here to go second.</span></a>
 		</center></td></tr>
 	</table>
 
@@ -66,7 +66,7 @@ document.getElementById("tablecontents").innerHTML=tablecontentsmarkup;
 function clicked(cell){
 	cellstatecount=0;
 	for(var i=0; i<tablecolumns*tablerows; i++){cellstatecount+=cellstate[i];}
-	if((cellstatecount==(tablecolumns*tablerows)-1) && (cell==tablecolumns*(tablerows-1))){document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:600%\"><br><br>You Lost &#9785;</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Click here to play again.</span>";}
+	if((cellstatecount==(tablecolumns*tablerows)-1) && (cell==tablecolumns*(tablerows-1))){document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:600%\"><br><br>You Lost &#9785;</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Tap here to play again.</span>";}
 	else if(playerturn==0){
 		if(cellstate[cell]==0){
 			for(var i=0; i<(tablecolumns*tablerows); i++){
@@ -87,7 +87,7 @@ function clicked(cell){
 			}
 			document.getElementById(cell).innerHTML="";
 			cellstate[cell]=1;
-			if(cell==(tablecolumns*(tablerows-1))){document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:600%\"><br><br>You Lost &#9785;</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Click here to play again.</span>";}
+			if(cell==(tablecolumns*(tablerows-1))){document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:600%\"><br><br>You Lost &#9785;</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Tap here to play again.</span>";}
 			else{
 				document.getElementById("instructions").innerHTML="<span style=\"font-size:130%\">Opponent is thinking...</span>";
 				thinkingtime=thinkingtimerandom*Math.random()+thinkingtimemin;
@@ -104,7 +104,7 @@ function aiturn(){
 	for(var i=0; i<tablecolumns*tablerows; i++){cellstatecount+=cellstate[i];}
 	if(cellstatecount==(tablecolumns*tablerows)-1){
 		document.getElementById((tablecolumns*(tablerows-1))).innerHTML="";
-		document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:800%\"><br>You Won!</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Click here to play again.</span>";}
+		document.getElementById("tablecontents").innerHTML="<tr><td><span onclick=\"window.location.href='index.html';\" style=\"font-family:Georgia; color:white; font-size:800%\"><br>You Won!</span></td></tr>"; document.getElementById("instructions").innerHTML="<span onclick=\"window.location.href='index.html';\">Tap here to play again.</span>";}
 
 	else {
 		validcell=0;
